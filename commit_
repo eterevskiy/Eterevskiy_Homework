@@ -1,4 +1,4 @@
 #!/bin/bash
 git add $1
-git commit -m "Add homework"
+git commit -m "Add homework $2" 
 git push
