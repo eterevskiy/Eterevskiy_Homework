@@ -146,7 +146,7 @@ class Game:
 
         return (minv, qx, qy)
 
-    def input_(self, preview: str):
+    def input_coordinates(self, preview: str):
         while True:
             try:
                 data = input(preview)
@@ -179,8 +179,8 @@ class Game:
 
                 while True:
 
-                    px = self.input_('Insert the X coordinate: ')
-                    py = self.input_('Insert the Y coordinate: ')
+                    px = self.input_coordinates('Insert the X coordinate: ')
+                    py = self.input_coordinates('Insert the Y coordinate: ')
                     if self.is_valid(px, py):
                         self.current_state[px][py] = 'X'
                         self.player_turn = 'O'
