@@ -1,4 +1,7 @@
 from random import choice
+import re
+
+
 class Game:
     def __init__(self):
         self.initialize_game()
@@ -10,13 +13,13 @@ class Game:
         self.player_turn = choice('XO')
 
     def draw_board(self):
-        print("    0  1  2  -> x")
+        print("    0  1  2  -> y")
         for i in range(0, 3):
             print(f"{i}", end="  ")
             for j in range(0, 3):
                 print('{}|'.format(self.current_state[i][j]), end=" ")
             print()
-        print("↓\ny")
+        print("↓\nx")
 
     def is_valid(self, px, py):
         if px < 0 or px > 2 or py < 0 or py > 2:
@@ -143,6 +146,17 @@ class Game:
 
         return (minv, qx, qy)
 
+    def input_(self, preview: str):
+        while True:
+            try:
+                data = input(preview)
+                if re.findall('[0-2]', data):
+                    return int(data)
+                else:
+                    raise Exception("Invalid value")
+            except Exception as err:
+                print(str(err))
+
     def play(self):
         while True:
             self.draw_board()
@@ -165,8 +179,8 @@ class Game:
 
                 while True:
 
-                    px = int(input('Insert the X coordinate: '))
-                    py = int(input('Insert the Y coordinate: '))
+                    px = self.input_('Insert the X coordinate: ')
+                    py = self.input_('Insert the Y coordinate: ')
                     if self.is_valid(px, py):
                         self.current_state[px][py] = 'X'
                         self.player_turn = 'O'
